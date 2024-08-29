@@ -26,6 +26,7 @@ def main():
         # This method should be called once per frame.
         # It will compute how many milliseconds have passed since the previous call.
         dt = clock.tick(60) / 1000
+        player.update(dt)
 
 
 if __name__ == "__main__":

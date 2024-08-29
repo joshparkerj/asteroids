@@ -13,12 +13,15 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    print(player.radius)
     while True:
         screen.fill("#000000")
         # draw things each frame
-        player.draw(screen)
+        for spr in drawable:
+            spr.draw(screen)
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -26,7 +29,8 @@ def main():
         # This method should be called once per frame.
         # It will compute how many milliseconds have passed since the previous call.
         dt = clock.tick(60) / 1000
-        player.update(dt)
+        for spr in updatable:
+            spr.update(dt)
 
 
 if __name__ == "__main__":
